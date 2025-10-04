@@ -2,4 +2,13 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
-return {}
+return {
+  {
+    'nvim-lua/plenary.vim',
+    name = 'plenary',
+  },
+  require 'custom.plugins.colors',
+  require 'custom.plugins.undotree',
+  require 'custom.plugins.zenmode',
+  require 'custom.plugins.harpoon',
+}
