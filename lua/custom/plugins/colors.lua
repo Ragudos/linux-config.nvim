@@ -6,8 +6,7 @@ function SetColorTheme(color)
   vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
 end
 
-return {
-  SetColorTheme,
+local config = {
   { -- You can easily change to a different colorscheme.
     -- Change the name of the colorscheme plugin below, and then
     -- change the command in the config to whatever the name of that colorscheme is.
@@ -29,13 +28,6 @@ return {
         undercurl = true,
         underline = false,
         bold = true,
-        italic = {
-          strings = false,
-          emphasis = false,
-          comments = false,
-          operators = false,
-          folds = false,
-        },
         strikethrough = true,
         invert_selection = false,
         invert_signs = false,
@@ -60,10 +52,6 @@ return {
         transparent = true, -- Enable this to disable setting the background color
         terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
         styles = {
-          -- Style to be applied to different syntax groups
-          -- Value is any valid attr-list value for `:help nvim_set_hl`
-          comments = { italic = false },
-          keywords = { italic = false },
           -- Background styles. Can be "dark", "transparent" or "normal"
           sidebars = 'dark', -- style for sidebars, see below
           floats = 'dark', -- style for floating windows
@@ -77,12 +65,13 @@ return {
     config = function()
       require('rose-pine').setup {
         disable_background = true,
-        styles = {
-          italic = false,
-        },
       }
 
       SetColorTheme()
     end,
   },
 }
+
+config.SetColorTheme = SetColorTheme
+
+return config

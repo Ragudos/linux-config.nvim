@@ -4,7 +4,7 @@
 -- See the kickstart.nvim README for more information
 return {
   {
-    'nvim-lua/plenary.vim',
+    'nvim-lua/plenary.nvim',
     name = 'plenary',
   },
   require 'custom.plugins.colors',
