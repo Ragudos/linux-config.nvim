@@ -1,5 +1,6 @@
 return {
   'folke/zen-mode.nvim',
+  event = { 'VimEnter' },
   config = function()
     vim.keymap.set('n', '<leader>zz', function()
       require('zen-mode').setup {

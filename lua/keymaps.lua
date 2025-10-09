@@ -94,9 +94,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- vim: ts=2 sts=2 sw=2 et
 
--- ==========================================================
--- Auto or Manual Code Action to Implement Interfaces
--- ==========================================================
 vim.api.nvim_create_autocmd('BufWritePost', {
   pattern = { '*.java', '*.go', '*.ts' },
   callback = function()
@@ -107,13 +104,6 @@ vim.api.nvim_create_autocmd('BufWritePost', {
     }
   end,
 })
-
--- Optional: Keymap to trigger manually
-vim.keymap.set('n', '<leader>i', function()
-  vim.lsp.buf.code_action {
-    context = { only = { 'source.implement.interface', 'quickfix' } },
-  }
-end, { desc = 'Implement interface methods' })
 
 -- Color scheme
 vim.keymap.set('n', '<leader>sct', function()

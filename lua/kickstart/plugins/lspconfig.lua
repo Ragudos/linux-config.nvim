@@ -213,7 +213,7 @@ return {
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        -- pyright = {},
+        --pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -223,6 +223,7 @@ return {
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         --
+        deno = {},
 
         lua_ls = {
           -- cmd = { ... },
@@ -239,7 +240,63 @@ return {
           },
         },
         jdtls = {
-          settings = {},
+          settings = {
+            java = {
+              runtimes = {},
+            },
+            -- We do multiple verifications to make sure things are in place to run this
+            -- plugin
+            verification = {
+              -- nvim-java checks for the order of execution of following
+              -- * require('java').setup()
+              -- * require('lspconfig').jdtls.setup()
+              -- IF they are not executed in the correct order, you will see a error
+              -- notification.
+              -- Set following to false to disable the notification if you know what you
+              -- are doing
+              invalid_order = true,
+
+              -- nvim-java checks if the require('java').setup() is called multiple
+              -- times.
+              -- IF there are multiple setup calls are executed, an error will be shown
+              -- Set following property value to false to disable the notification if
+              -- you know what you are doing
+              duplicate_setup_calls = true,
+
+              -- nvim-java checks if nvim-java/mason-registry is added correctly to
+              -- mason.nvim plugin.
+              -- IF it's not registered correctly, an error will be thrown and nvim-java
+              -- will stop setup
+              invalid_mason_registry = false,
+            },
+            notifications = {
+              -- enable 'Configuring DAP' & 'DAP configured' messages on start up
+              dap = true,
+            },
+            mason = {
+              -- These mason registries will be prepended to the existing mason
+              -- configuration
+              registries = {
+                'github:nvim-java/mason-registry',
+              },
+            },
+          },
+        },
+        jsonls = {
+          settings = {
+            json = {
+              schemas = require('schemas').json,
+              validate = { enable = true },
+            },
+          },
+        },
+        yamlls = {
+          settings = {
+            yaml = {
+              schemas = require('schemas').yaml,
+              validate = { enable = true },
+            },
+          },
         },
       }
 
