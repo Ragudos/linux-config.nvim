@@ -16,12 +16,12 @@ return {
         local opts = { buffer = bufnr, remap = false }
         vim.keymap.set('n', '<leader>p', function()
           vim.cmd.Git 'push'
-        end, { table.unpack(opts), desc = 'push' })
+        end, { buffer = opts.buffer, remap = opts.remap, desc = 'push' })
 
         -- rebase always
         vim.keymap.set('n', '<leader>P', function()
           vim.cmd.Git { 'pull', '--rebase' }
-        end, { table.unpack(opts), desc = 'rebase' })
+        end, { buffer = opts.buffer, remap = opts.remap, desc = 'rebase' })
 
         -- NOTE: It allows me to easily set the branch i am pushing and any tracking
         -- needed if i did not set the branch up correctly
