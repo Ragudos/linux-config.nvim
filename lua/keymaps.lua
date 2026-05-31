@@ -64,4 +64,45 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function() vim.hl.on_yank() end,
 })
 
+-- File tree / Navigation
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Open File Explorer (Netrw)" })
+
+-- Visual Mode Line Movement
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selected lines down" })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selected lines up" })
+
+-- Normal Mode Editing & Scrollin
+vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position" })
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down half-page and center" })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up half-page and center" })
+
+-- Search Navigation
+vim.keymap.set("n", "n", "nzzzv", { desc = "Next search match (centered)" })
+vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search match (centered)" })
+
+-- Clipboard Actions
+vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste and keep current register" })
+
+vim.keymap.set({"n", "v"}, "<leader>y", [["+y]], { desc = "Yank to system clipboard" })
+vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Yank line to system clipboard" })
+
+-- Deletion
+vim.keymap.set({"n", "v"}, "<leader>d", [["_d]], { desc = "Delete to black hole register (no clipboard overwrite)" })
+
+-- Utilities & Safeguards
+vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "Exit insert mode (triggers InsertLeave)" })
+
+
+vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+
+-- Quickfix & Location List Navigation
+vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz", { desc = "Next quickfix item (centered)" })
+vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz", { desc = "Previous quickfix item (centered)" })
+vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Next location list item (centered)" })
+vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Previous location list item (centered)" })
+
+-- Search & Permissions
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Search and replace word under cursor" })
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make current file executable" })
+
 -- vim: ts=2 sts=2 sw=2 et
